@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './form.css';
 
 const Form = () => {
@@ -9,22 +9,43 @@ const Form = () => {
     let[elist,setelist]=useState([0]);
     let[welist,setwelist]=useState([0]);
 
+    const [search,setsearch]=useState('');
+    const [skillList,setskillList]=useState([]);
+
     const addelist=()=>{
         setcounted(counted+1);
         setelist([...elist,counted]);
         
         
     }
-    // console.log('elist');
-    // console.log(elist);
-    // console.log(counted);
 
+    // workexperience
     const addwelist=()=>{
         setcountwex(countwex+1);
         setwelist([...welist,countwex]);
         
         
     }
+
+    const searchStates=async(e)=>{
+        
+        setsearch(e.target.value);
+        const res=await fetch('../../../public/data/skills.json')
+            
+        console.log(res);
+        const states= await res.json();
+
+        let matches=states.fliter(state=>{
+            const regex=new RegExp(`^${search}`,'gi');
+            return state.name.match(regex);
+        })
+
+        console.log(matches);
+
+    }
+   
+
+
     
   return (
     <div className='container'>
@@ -85,7 +106,7 @@ const Form = () => {
                        
                     </div>
                     ))}
-                    <div className='container text-center mt-3'>
+                    <div className='container text-center mt-2'>
                             <button className='btn btn-primary btn-sm' onClick={addelist}>add</button>
                         </div>
                     
@@ -105,13 +126,16 @@ const Form = () => {
                         </div>))
                         
                     }
-                    <div className='container text-center mt-3'>
-                                <button className='btn btn-primary btn-sm' onClick={addwelist}>add</button>
-                            </div>
+                    <div className='container text-center mt-2'>
+                        <button className='btn btn-primary btn-sm' onClick={addwelist}>add</button>
+                    </div>
                     
 
                     <label>Skills</label>
-                    <input type='text' placeholder='Enter your skills'></input>
+                    <input value={search} className='form-control' type='text' placeholder='Enter your skills' id='search' 
+                    onChange={(e)=>searchStates(e)
+                    } ></input>
+                    <div  value={skillList} className='skill-list'></div>
                 
 
 
