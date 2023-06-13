@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './form.css';
 
 const Form = () => {
+
+    
+    const [countwex,setcountwex]=useState(0);
+    const [counted,setcounted]=useState(0);
+    let[elist,setelist]=useState([0]);
+    let[welist,setwelist]=useState([0]);
+
+    const addelist=()=>{
+        setcounted(counted+1);
+        setelist([...elist,counted]);
+        
+        
+    }
+    // console.log('elist');
+    // console.log(elist);
+    // console.log(counted);
+
+    const addwelist=()=>{
+        setcountwex(countwex+1);
+        setwelist([...welist,countwex]);
+        
+        
+    }
+    
   return (
     <div className='container'>
 
@@ -39,6 +63,7 @@ const Form = () => {
                     <label>Social Links</label>
                     <input  className='form-control' type='text' placeholder='Enter your Linkedin Url'></input>
                     </div>
+                    
                     <div className='form-group mt-2'>
                     <label>Enter your Github Url</label>
                     <input className='form-control' type='text' placeholder='Enter your Linkedin Url'></input>
@@ -52,22 +77,38 @@ const Form = () => {
 
             </div>
             <div className='col-md-6'>
-
-                
-                    <div className='form-group mt-2'>
                     <label>Work Experience</label>
-                    <textarea className='form-control' placeholder='Enter your work Experience' rows={5}></textarea>
+                    {elist.map(item=>(
+                        <div className='form-group mt-2'>
+                        
+                        <textarea className='form-control' placeholder='Enter your work Experience' rows={4}></textarea>
+                       
                     </div>
+                    ))}
+                    <div className='container text-center mt-3'>
+                            <button className='btn btn-primary btn-sm' onClick={addelist}>add</button>
+                        </div>
+                    
 
                     <div className='form-group mt-2'>
-                    <label>Projects</label>
-                    <textarea className='form-control' placeholder='Enter the projects you have built'></textarea>
+                        <label>Projects</label>
+                        <textarea className='form-control' placeholder='Enter the projects you have built' rows={3}></textarea>
                     </div>
 
-                    <div className='form-group mt-2'>
+                    {/* New input field */}
                     <label>Education</label>
-                    <textarea className='form-control'></textarea>
-                    </div>
+                    { welist.map(item=>(
+                        <div className='form-group mt-2'>
+                            
+                            <textarea className='form-control' rows={3}></textarea>
+                            
+                        </div>))
+                        
+                    }
+                    <div className='container text-center mt-3'>
+                                <button className='btn btn-primary btn-sm' onClick={addwelist}>add</button>
+                            </div>
+                    
 
                     <label>Skills</label>
                     <input type='text' placeholder='Enter your skills'></input>
