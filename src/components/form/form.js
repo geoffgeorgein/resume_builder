@@ -3,64 +3,82 @@ import './form.css';
 
 const Form = () => {
   return (
-    <div className='form'>
+    <div className='container'>
 
         
+        <div className='row'>
+            <div className='col-md-6 form-group'>
 
-            <div className='left_container'>
+                
+                    <div className='form-group mt-2'>
 
-                <div className='container'>
-                    
+                        <label>First name</label>
 
-                    <label>First name</label>
+                        <input className='form-control' type='text' placeholder='Enter your first name'></input>
+                    </div>
 
-                    <input type='text' placeholder='Enter your first name'></input>
+                    <div className='form-group mt-2'>
                     <label>Last name</label>
-                    <input type='text' placeholder='Enter your last name'></input>
+                    <input  className='form-control' type='text' placeholder='Enter your last name'></input>
+                    </div>
 
+                    <div className='form-group mt-2'>
                     <label>Email addresses</label>
 
-                    <input type='email' placeholder='Enter your email addresses'></input>
+                    <input  className='form-control' type='email' placeholder='Enter your email addresses'></input>
+                    </div>
 
-                    <label>Contact No.</label>
+                    <div className='form-group mt-2'>
 
-                    <input type='number' placeholder='Enter your Contact number'></input>
+                    <label className='control-label'>Contact No.</label>
 
+                    <input className='form-control' type='number' placeholder='Enter your Contact number'></input>
+                    </div>
+
+                    <div className='form-group mt-2'>
                     <label>Social Links</label>
-                    <input type='text' placeholder='Enter your Linkedin Url'></input>
+                    <input  className='form-control' type='text' placeholder='Enter your Linkedin Url'></input>
+                    </div>
+                    <div className='form-group mt-2'>
                     <label>Enter your Github Url</label>
-                    <input type='text' placeholder='Enter your Linkedin Url'></input>
+                    <input className='form-control' type='text' placeholder='Enter your Linkedin Url'></input>
+                    </div>
 
 
 
 
-
-                </div>
 
 
 
             </div>
-            <div className='right_container'>
+            <div className='col-md-6'>
 
-                <div className='container'>
-
+                
+                    <div className='form-group mt-2'>
                     <label>Work Experience</label>
-                    <textarea placeholder='Enter your work Experience'></textarea>
+                    <textarea className='form-control' placeholder='Enter your work Experience' rows={5}></textarea>
+                    </div>
 
+                    <div className='form-group mt-2'>
                     <label>Projects</label>
-                    <textarea placeholder='Enter the projects you have built'></textarea>
+                    <textarea className='form-control' placeholder='Enter the projects you have built'></textarea>
+                    </div>
 
+                    <div className='form-group mt-2'>
                     <label>Education</label>
-                    <textarea></textarea>
+                    <textarea className='form-control'></textarea>
+                    </div>
 
                     <label>Skills</label>
                     <input type='text' placeholder='Enter your skills'></input>
-                </div>
+                
 
 
 
             </div>
         </div>
+
+    </div>
 
     
   )
