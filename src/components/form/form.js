@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
+import { Fragment } from 'react';
 import './form.css';
+import Resume from '../resume';
 
 const Form = () => {
 
@@ -8,6 +10,15 @@ const Form = () => {
     const [counted,setcounted]=useState(0);
     let[elist,setelist]=useState([0]);
     let[welist,setwelist]=useState([0]);
+
+    const[btnsubmit,setbtnsubmit]=useState(false);
+
+    const fname=useRef('');
+    const lname=useRef('');
+    const email=useRef('');
+    const contactno=useRef('');
+    const linkedin=useRef('');
+    const github=useRef('');
 
     const [search,setsearch]=useState('');
     const [skillList,setskillList]=useState([]);
@@ -43,109 +54,125 @@ const Form = () => {
         console.log(matches);
 
     }
+
+
+
+    const onsubmit=(e)=>{
+        e.preventDefault();
+        setbtnsubmit(true);
+
+    }
    
 
 
     
   return (
-    <div className='container'>
+    <>
+        {!btnsubmit && <div className='container'>
 
+                <h2 className='text-center'>Personal Information</h2>
+                <div className='row'>
+                    <div className='col-md-6 form-group'>
+
+                        
+                            <div className='form-group mt-2'>
+
+                                <label>First name</label>
+
+                                <input ref={fname} className='form-control' type='text' placeholder='Enter your first name'></input>
+                            </div>
+
+                            <div className='form-group mt-2'>
+                            <label>Last name</label>
+                            <input ref={lname}  className='form-control' type='text' placeholder='Enter your last name'></input>
+                            </div>
+
+                            <div className='form-group mt-2'>
+                            <label>Email addresses</label>
+
+                            <input ref={email}  className='form-control' type='email' placeholder='Enter your email addresses'></input>
+                            </div>
+
+                            <div className='form-group mt-2'>
+
+                            <label className='control-label'>Contact No.</label>
+
+                            <input ref={contactno} className='form-control' type='number' placeholder='Enter your Contact number'></input>
+                            </div>
+
+                            <div className='form-group mt-2'>
+                            <label>Social Links</label>
+                            <input ref={linkedin}  className='form-control' type='text' placeholder='Enter your Linkedin Url'></input>
+                            </div>
+                            
+                            <div className='form-group mt-2'>
+                            <label>Enter your Github Url</label>
+                            <input ref={github} className='form-control' type='text' placeholder='Enter your Github Url'></input>
+                            </div>
+
+
+
+
+
+
+
+                    </div>
+                    <div className='col-md-6'>
+                            <label>Work Experience</label>
+                            {elist.map(item=>(
+                                <div className='form-group mt-2'>
+                                
+                                <textarea className='form-control' placeholder='Enter your work Experience' rows={4}></textarea>
+                            
+                            </div>
+                            ))}
+                            <div className='container text-center mt-2'>
+                                    <button className='btn btn-primary btn-sm' onClick={addelist}>add</button>
+                                </div>
+                            
+
+                            <div className='form-group mt-2'>
+                                <label>Projects</label>
+                                <textarea className='form-control' placeholder='Enter the projects you have built' rows={3}></textarea>
+                            </div>
+
+                            {/* New input field */}
+                            <label>Education</label>
+                            { welist.map(item=>(
+                                <div className='form-group mt-2'>
+                                    
+                                    <textarea className='form-control' rows={3}></textarea>
+                                    
+                                </div>))
+                                
+                            }
+                            <div className='container text-center mt-2'>
+                                <button className='btn btn-primary btn-sm' onClick={addwelist}>add</button>
+                            </div>
+                            
+
+                            <label>Skills</label>
+                            <input value={search} className='form-control' type='text' placeholder='Enter your skills' id='search' 
+                            onChange={(e)=>searchStates(e)
+                            } ></input>
+                            <div  value={skillList} className='skill-list'></div>
+                        
+
+
+
+                    </div>
+                </div>
+                <button className='btn alert alert-primary' type='submit' onClick={onsubmit}>submit</button>
+
+            </div> }
         
-        <div className='row'>
-            <div className='col-md-6 form-group'>
-
                 
-                    <div className='form-group mt-2'>
+                {btnsubmit && <Resume fname={fname} lname={lname} contactno={contactno} email={email}
+                 github={github} linkedin={linkedin} />  }   
 
-                        <label>First name</label>
+                {btnsubmit&& <button className='btn alert alert-primary' onClick={()=>setbtnsubmit(false)} >back</button>}
 
-                        <input className='form-control' type='text' placeholder='Enter your first name'></input>
-                    </div>
-
-                    <div className='form-group mt-2'>
-                    <label>Last name</label>
-                    <input  className='form-control' type='text' placeholder='Enter your last name'></input>
-                    </div>
-
-                    <div className='form-group mt-2'>
-                    <label>Email addresses</label>
-
-                    <input  className='form-control' type='email' placeholder='Enter your email addresses'></input>
-                    </div>
-
-                    <div className='form-group mt-2'>
-
-                    <label className='control-label'>Contact No.</label>
-
-                    <input className='form-control' type='number' placeholder='Enter your Contact number'></input>
-                    </div>
-
-                    <div className='form-group mt-2'>
-                    <label>Social Links</label>
-                    <input  className='form-control' type='text' placeholder='Enter your Linkedin Url'></input>
-                    </div>
-                    
-                    <div className='form-group mt-2'>
-                    <label>Enter your Github Url</label>
-                    <input className='form-control' type='text' placeholder='Enter your Linkedin Url'></input>
-                    </div>
-
-
-
-
-
-
-
-            </div>
-            <div className='col-md-6'>
-                    <label>Work Experience</label>
-                    {elist.map(item=>(
-                        <div className='form-group mt-2'>
-                        
-                        <textarea className='form-control' placeholder='Enter your work Experience' rows={4}></textarea>
-                       
-                    </div>
-                    ))}
-                    <div className='container text-center mt-2'>
-                            <button className='btn btn-primary btn-sm' onClick={addelist}>add</button>
-                        </div>
-                    
-
-                    <div className='form-group mt-2'>
-                        <label>Projects</label>
-                        <textarea className='form-control' placeholder='Enter the projects you have built' rows={3}></textarea>
-                    </div>
-
-                    {/* New input field */}
-                    <label>Education</label>
-                    { welist.map(item=>(
-                        <div className='form-group mt-2'>
-                            
-                            <textarea className='form-control' rows={3}></textarea>
-                            
-                        </div>))
-                        
-                    }
-                    <div className='container text-center mt-2'>
-                        <button className='btn btn-primary btn-sm' onClick={addwelist}>add</button>
-                    </div>
-                    
-
-                    <label>Skills</label>
-                    <input value={search} className='form-control' type='text' placeholder='Enter your skills' id='search' 
-                    onChange={(e)=>searchStates(e)
-                    } ></input>
-                    <div  value={skillList} className='skill-list'></div>
-                
-
-
-
-            </div>
-        </div>
-
-    </div>
-
-    
+    </>
   )
 }
 
