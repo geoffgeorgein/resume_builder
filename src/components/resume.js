@@ -43,11 +43,17 @@ const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed}) => {
 
                             
                             {wex.map(item=>(
+                                
                                 <div className='card-body'>
+                                    
+                                    {item['id'].length>0 && 
+
                                     <ul>
-                                        <li>{item['id']}</li>
-                                        
-                                    </ul>
+                                    
+                                        <li>{ item['id']}</li>
+                                    </ul>  
+                                    }
+                                    
                                 </div>
                             ))}
                                 
@@ -62,10 +68,12 @@ const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed}) => {
 
                             {wed.map(item=>(
                                 <div className='card-body'>
-                                    <ul>
+                                {item['id'].length>0 && 
+                                            <ul>
                                         <li>{item['id']}</li>
                                         
-                                    </ul>
+                                    </ul> }
+                                    
                                 </div>
                                 ))}
                                 
