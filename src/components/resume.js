@@ -1,6 +1,8 @@
 import React from 'react'
 
-const Resume = ({fname,lname,contactno,email,linkedin,github}) => {
+const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed}) => {
+
+    console.log(wex);
   return (
     <div className='container'>
             
@@ -39,13 +41,17 @@ const Resume = ({fname,lname,contactno,email,linkedin,github}) => {
                                 </div>
                             </div>
 
-                            <div className='card-body'>
-                                <ul>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                            </div>
+                            
+                            {wex.map(item=>(
+                                <div className='card-body'>
+                                    <ul>
+                                        <li>{item['id']}</li>
+                                        
+                                    </ul>
+                                </div>
+                            ))}
+                                
+                            
 
                             <div className='card mt-4'>
 
@@ -54,13 +60,17 @@ const Resume = ({fname,lname,contactno,email,linkedin,github}) => {
                                 </div>
                             </div>
 
-                            <div className='card-body'>
-                                <ul>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                </ul>
-                            </div>
+                            {wed.map(item=>(
+                                <div className='card-body'>
+                                    <ul>
+                                        <li>{item['id']}</li>
+                                        
+                                    </ul>
+                                </div>
+                                ))}
+                                
+
+                          
 
                             <div className='card mt-4'>
 

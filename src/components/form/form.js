@@ -8,8 +8,8 @@ const Form = () => {
     
     const [countwex,setcountwex]=useState(0);
     const [counted,setcounted]=useState(0);
-    let[elist,setelist]=useState([0]);
-    let[welist,setwelist]=useState([0]);
+    let[elist,setelist]=useState([{id:""}]);
+    let[welist,setwelist]=useState([{id:""}]);
 
     const[btnsubmit,setbtnsubmit]=useState(false);
 
@@ -19,24 +19,39 @@ const Form = () => {
     const contactno=useRef('');
     const linkedin=useRef('');
     const github=useRef('');
+    const wed=useRef('');
+    const wex=useRef('');
 
     const [search,setsearch]=useState('');
     const [skillList,setskillList]=useState([]);
 
     const addelist=()=>{
         setcounted(counted+1);
-        setelist([...elist,counted]);
+        setelist([...elist,{
+            id:wed.current.value
+        }
+        ]);
+        console.log("wedd")
+        console.log(wed.current.value);
         
         
     }
+    console.log('elist');
+    console.log(elist);
 
     // workexperience
     const addwelist=()=>{
         setcountwex(countwex+1);
-        setwelist([...welist,countwex]);
+        setwelist([...welist,{
+            id:wex.current.value
+        }]);
+        console.log("wexx")
+        console.log(wex.current.value);
         
         
     }
+    console.log('welist');
+    console.log(welist);
 
     const searchStates=async(e)=>{
         
@@ -119,35 +134,35 @@ const Form = () => {
                     </div>
                     <div className='col-md-6'>
                             <label>Work Experience</label>
-                            {elist.map(item=>(
-                                <div className='form-group mt-2'>
+                            {welist.map(item=>(
+                                <div className='form-group mt-2 wex' id={item} >
                                 
-                                <textarea className='form-control' placeholder='Enter your work Experience' rows={4}></textarea>
+                                    <textarea ref={wex} className='form-control' placeholder='Enter your work Experience' rows={4}></textarea>
                             
-                            </div>
+                                </div>
                             ))}
                             <div className='container text-center mt-2'>
-                                    <button className='btn btn-primary btn-sm' onClick={addelist}>add</button>
+                                    <button className='btn btn-primary btn-sm' onClick={addwelist}>add</button>
                                 </div>
                             
 
                             <div className='form-group mt-2'>
                                 <label>Projects</label>
-                                <textarea className='form-control' placeholder='Enter the projects you have built' rows={3}></textarea>
+                                <textarea className='form-control' placeholder='Enter the projects you have built' rows={4}></textarea>
                             </div>
 
                             {/* New input field */}
                             <label>Education</label>
-                            { welist.map(item=>(
-                                <div className='form-group mt-2'>
+                            { elist.map(item=>(
+                                <div className='form-group mt-2 wed' id={item} >
                                     
-                                    <textarea className='form-control' rows={3}></textarea>
+                                    <textarea className='form-control' rows={3} ref={wed} id={item}></textarea>
                                     
                                 </div>))
                                 
                             }
                             <div className='container text-center mt-2'>
-                                <button className='btn btn-primary btn-sm' onClick={addwelist}>add</button>
+                                <button className='btn btn-primary btn-sm' onClick={addelist}>add</button>
                             </div>
                             
 
@@ -168,7 +183,7 @@ const Form = () => {
         
                 
                 {btnsubmit && <Resume fname={fname} lname={lname} contactno={contactno} email={email}
-                 github={github} linkedin={linkedin} />  }   
+                 github={github} linkedin={linkedin}  wed={elist} wex={welist} />  }   
 
                 {btnsubmit&& <button className='btn alert alert-primary' onClick={()=>setbtnsubmit(false)} >back</button>}
 
