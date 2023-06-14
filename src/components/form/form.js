@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import './form.css';
 import Resume from '../resume';
 
+
 const Form = () => {
 
     
@@ -19,11 +20,14 @@ const Form = () => {
     const contactno=useRef('');
     const linkedin=useRef('');
     const github=useRef('');
+    const projects=useRef('');
     const wed=useRef('');
     const wex=useRef('');
+    const skills=useRef("");
+    const address=useRef('');
 
-    const [search,setsearch]=useState('');
-    const [skillList,setskillList]=useState([]);
+    // const [search,setsearch]=useState('');
+    // const [skillList,setskillList]=useState([]);
 
     const addelist=()=>{
         setcounted(counted+1);
@@ -45,30 +49,30 @@ const Form = () => {
         setwelist([...welist,{
             id:wex.current.value
         }]);
-        console.log("wexx")
-        console.log(wex.current.value);
+        // console.log("wexx")
+        // console.log(wex.current.value);
         
         
-    }
-    console.log('welist');
-    console.log(welist);
+     }
+    // console.log('welist');
+    // console.log(welist);
 
-    const searchStates=async(e)=>{
+    // const searchStates=async(e)=>{
         
-        setsearch(e.target.value);
-        const res=await fetch('../../../public/data/skills.json')
+    //     setsearch(e.target.value);
+    //     const res=await fetch('../../../public/data/skills.json')
             
-        console.log(res);
-        const states= await res.json();
+    //     console.log(res);
+    //     const states= await res.json();
 
-        let matches=states.fliter(state=>{
-            const regex=new RegExp(`^${search}`,'gi');
-            return state.name.match(regex);
-        })
+    //     let matches=states.fliter(state=>{
+    //         const regex=new RegExp(`^${search}`,'gi');
+    //         return state.name.match(regex);
+    //     })
 
-        console.log(matches);
+    //     console.log(matches);
 
-    }
+    // }
 
 
 
@@ -125,6 +129,12 @@ const Form = () => {
                             <input ref={github} className='form-control' type='text' placeholder='Enter your Github Url'></input>
                             </div>
 
+                            <label>Skills</label>
+                            <textarea className='form-control' rows={3} ref={skills} ></textarea>
+
+                            <label>Addresses</label>
+                            <textarea ref={address} className='form-control' rows={3}  ></textarea>
+
 
 
 
@@ -148,7 +158,7 @@ const Form = () => {
 
                             <div className='form-group mt-2'>
                                 <label>Projects</label>
-                                <textarea className='form-control' placeholder='Enter the projects you have built' rows={4}></textarea>
+                                <textarea ref={projects} className='form-control' placeholder='Enter the projects you have built' rows={4}></textarea>
                             </div>
 
                             {/* New input field */}
@@ -164,16 +174,7 @@ const Form = () => {
                             <div className='container text-center mt-2'>
                                 <button className='btn btn-primary btn-sm' onClick={addelist}>add</button>
                             </div>
-                            
-
-                            <label>Skills</label>
-                            <input value={search} className='form-control' type='text' placeholder='Enter your skills' id='search' 
-                            onChange={(e)=>searchStates(e)
-                            } ></input>
-                            <div  value={skillList} className='skill-list'></div>
-                        
-
-
+                 
 
                     </div>
                 </div>
@@ -182,10 +183,10 @@ const Form = () => {
             </div> }
         
                 
-                {btnsubmit && <Resume fname={fname} lname={lname} contactno={contactno} email={email}
-                 github={github} linkedin={linkedin}  wed={elist} wex={welist} />  }   
+                {btnsubmit && <Resume fname={fname} lname={lname} contactno={contactno} email={email} address={address}
+                 github={github} linkedin={linkedin}  wed={elist} wex={welist} skills={skills} projects={projects}  />  }   
 
-                {btnsubmit&& <button className='btn alert alert-primary' onClick={()=>setbtnsubmit(false)} >back</button>}
+                
 
     </>
   )

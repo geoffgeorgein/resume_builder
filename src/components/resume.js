@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
+import './resume.css';
 
-const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed}) => {
+const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed,skills,projects,address}) => {
 
-    console.log(wex);
+    const[showbtn,setshowbtn]=useState(true);
+    const printcv=()=>{
+        setshowbtn(false);
+        window.print();
+    }
+
+
   return (
     <div className='container'>
             
@@ -21,13 +28,18 @@ const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed}) => {
 
                             <p>
                                 <a href='#1'>
-                                    {linkedin.current.value}
+                                    {linkedin.current.value}    
                                 </a>
                             </p>
 
                             <h3>Skills</h3>
                             <p>
+                                {skills.current.value}
+                            </p>
 
+                            <h3>Address</h3>
+                            <p>
+                                {address.current.value}
                             </p>
 
 
@@ -88,7 +100,7 @@ const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed}) => {
                             </div>
 
                             <div className='card-body'>
-                                <p></p>
+                                <p>{projects.current.value}</p>
                             </div>
 
                             <div className='container mt-3 text-center'></div>
@@ -97,8 +109,15 @@ const Resume = ({fname,lname,contactno,email,linkedin,github,wex,wed}) => {
 
 
             </div>
-            
+                                <div className='container noprint'>
+                                    <div className='row btnContainer'>
+                                       {/* {showbtn && <button className={'btn alert alert-primary '+(!showbtn && 'active') } ></button> }  */}
+                                        <btn className='btn btn-primary text-center' onClick={printcv}>Print CV</btn>
 
+                                    </div>
+                                    
+                                </div>
+                             
         </div>
   )
 }
